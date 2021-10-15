@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Implementation-Title: AEM POC Sites Project - UI content
+Content-Package-Roots: /conf/poc,/content/dam/poc,/content/experience-
+ fragments/poc,/content/poc
+Implementation-Version: 0.0.1-SNAPSHOT
+Content-Package-Dependencies-Locations: com.adobe.aem.guides.poc:aem-g
+ uides-poc.ui.apps:0.0.1-SNAPSHOT=maven:com.adobe.aem.guides.poc:aem-g
+ uides-poc.ui.apps:0.0.1-SNAPSHOT:zip
+Content-Package-Dependencies: com.adobe.aem.guides.poc:aem-guides-poc.
+ ui.apps:0.0.1-SNAPSHOT
+Build-Jdk-Spec: 1.8
+Content-Package-Type: content
+Created-By: Apache Jackrabbit FileVault - Package Maven Plugin 1.1.4
+Content-Package-Id: com.adobe.aem.guides.poc:aem-guides-poc.ui.content
+ :0.0.1-SNAPSHOT
+Content-Package-Description: UI content package for AEM POC Sites Proj
+ ect
+
