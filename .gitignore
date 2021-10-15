@@ -68,7 +68,7 @@ local.properties
 *.jar
 *.rar
 *.tar
-*.zip
+#*.zip
 *.vlt
 
 # Logs and databases #
