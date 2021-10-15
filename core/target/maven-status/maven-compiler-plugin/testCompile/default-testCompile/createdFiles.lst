@@ -1,5 +1,0 @@
-com/adobe/aem/guides/poc/core/servlets/SimpleServletTest.class
-com/adobe/aem/guides/poc/core/models/HelloWorldModelTest.class
-com/adobe/aem/guides/poc/core/listeners/SimpleResourceListenerTest.class
-com/adobe/aem/guides/poc/core/filters/LoggingFilterTest.class
-com/adobe/aem/guides/poc/core/schedulers/SimpleScheduledTaskTest.class

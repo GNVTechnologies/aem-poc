@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0" name="com.adobe.aem.guides.poc.core.servlets.DocumentProcessorWorkflowServlet">
-  <property name="sling.servlet.paths" type="String">/bin/poc/processdoc</property>
-  <property name="service.description" type="String" value="Document Processor Workflow Servlet"/>
-  <service>
-    <provide interface="javax.servlet.Servlet"/>
-  </service>
-  <implementation class="com.adobe.aem.guides.poc.core.servlets.DocumentProcessorWorkflowServlet"/>
-</scr:component>

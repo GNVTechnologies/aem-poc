@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0" name="com.adobe.aem.guides.poc.core.workflow.process.ExceptionProcess">
-  <property name="process.label" type="String" value="POC Throw Exception (JavaProcess)"/>
-  <service>
-    <provide interface="com.adobe.granite.workflow.exec.WorkflowProcess"/>
-  </service>
-  <implementation class="com.adobe.aem.guides.poc.core.workflow.process.ExceptionProcess"/>
-</scr:component>
