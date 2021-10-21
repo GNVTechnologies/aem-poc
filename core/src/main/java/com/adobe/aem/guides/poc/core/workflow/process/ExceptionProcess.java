@@ -23,20 +23,6 @@ public class ExceptionProcess implements WorkflowProcess {
 
   public void execute(WorkItem item, WorkflowSession session, MetaDataMap args) throws WorkflowException {
     if (true) throw new WorkflowException("programatically thrown exception");
-    WorkflowData workflowData = item.getWorkflowData();
-    if (workflowData.getPayloadType().equals(TYPE_JCR_PATH)) {
-      String path = workflowData.getPayload().toString() + "/jcr:content";
-      try {
-        Session jcrSession = session.adaptTo(Session.class);
-        Node node = (Node) jcrSession.getItem(path);
-        if (node != null) {
-          node.setProperty("approved", readArgument(args));
-          jcrSession.save();
-        }
-      } catch (RepositoryException e) {
-        throw new WorkflowException(e.getMessage(), e);
-      }
-    }
   }
 
   private boolean readArgument(MetaDataMap args) {
