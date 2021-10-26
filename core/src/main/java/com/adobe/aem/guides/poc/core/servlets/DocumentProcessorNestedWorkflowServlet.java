@@ -128,6 +128,8 @@ public class DocumentProcessorNestedWorkflowServlet extends SlingSafeMethodsServ
                         Thread.sleep(1000);
                         loop++;
                         logger.info("Loop Counter:" + loop);
+                        //workflow either completed successfully or possibly errored and still in "RUNNING" state
+                        //checkForUnhandledExceptions(wf, wfSession, wfProcessResult);
                     } catch (Exception e) {
                         wfProcessResult.addProperty("error", e.getMessage());
                     }
@@ -135,7 +137,6 @@ public class DocumentProcessorNestedWorkflowServlet extends SlingSafeMethodsServ
                     break;
                 }
             }
-            //workflow either completed successfully or possible errored and still in "RUNNING" state
 
             //Properly written workflow processes should handle all exceptions and set error messages into workflow data map
             MetaDataMap wfd = wf.getWorkflowData().getMetaDataMap();
@@ -145,25 +146,7 @@ public class DocumentProcessorNestedWorkflowServlet extends SlingSafeMethodsServ
                 wfProcessResult.addProperty("exception", wfd.get(ExceptionHandledProcess.EXP_ERROR).toString());
             }
 
-            //Misbehaved Workflow Steps may throw uncaught exception, error out but still keep the workflow in RUNNING state.
-            // these may be terminated programatically, but for now, lets just get information about them and add to response
-            JsonArray failures = new JsonArray();
-            wf.getWorkItems().forEach((item) -> {
-                logger.info((item.getItemSubType()));
-                //subType - FailureItem
-                JsonObject failedItem = new JsonObject();
-                failedItem.addProperty("id", item.getId());
-                MetaDataMap data = item.getMetaDataMap();
-                data.keySet().forEach((key) -> {
-                    failedItem.addProperty(key, data.get(key).toString());
-                });
-                failures.add(failedItem);
-            });
-            wfProcessResult.add("failures", failures);
-            //if the workflow is still running after wait period, lets abort it
-            if(StringUtils.equals("RUNNING", status)) {
-                wfSession.terminateWorkflow(wf);
-            }
+
         } catch (WorkflowException e) {
             e.printStackTrace();
             wfProcessResult.addProperty("error", e.getMessage());
@@ -176,6 +159,31 @@ public class DocumentProcessorNestedWorkflowServlet extends SlingSafeMethodsServ
         }
         logger.info(wfProcessResult.toString());
         processResult.add(workflowId, wfProcessResult);
+    }
+
+    //ALERT - The following method will terminate the workflow if there was an unhandled error / exception
+    private void checkForUnhandledExceptions(Workflow wf, WorkflowSession wfSession, JsonObject wfProcessResult)
+        throws WorkflowException {
+        //Misbehaved Workflow Steps may throw uncaught exception, error out but still keep the workflow in RUNNING state.
+        // these may be terminated programatically, but for now, lets just get information about them and add to response
+        String status = wf.getState();
+        JsonArray failures = new JsonArray();
+        wf.getWorkItems().forEach((item) -> {
+            logger.info((item.getItemSubType()));
+            //subType - FailureItem
+            JsonObject failedItem = new JsonObject();
+            failedItem.addProperty("id", item.getId());
+            MetaDataMap data = item.getMetaDataMap();
+            data.keySet().forEach((key) -> {
+                failedItem.addProperty(key, data.get(key).toString());
+            });
+            failures.add(failedItem);
+        });
+        wfProcessResult.add("failures", failures);
+        //if the workflow is still running after wait period, lets abort it
+        if(StringUtils.equals("RUNNING", status)) {
+            wfSession.terminateWorkflow(wf);
+        }
     }
 
     private void monitorChildWorkflows(String workflowId, WorkflowSession wfSession, JsonObject processResult, Map<String, String> workingData) {
