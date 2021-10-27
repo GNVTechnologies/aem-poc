@@ -137,7 +137,6 @@ public class DocumentProcessorNestedWorkflowServlet extends SlingSafeMethodsServ
                     break;
                 }
             }
-
             //Properly written workflow processes should handle all exceptions and set error messages into workflow data map
             MetaDataMap wfd = wf.getWorkflowData().getMetaDataMap();
             wfProcessResult.addProperty("wfstatus", status);
@@ -145,6 +144,8 @@ public class DocumentProcessorNestedWorkflowServlet extends SlingSafeMethodsServ
             if(wfd.containsKey(ExceptionHandledProcess.EXP_ERROR)) {
                 wfProcessResult.addProperty("exception", wfd.get(ExceptionHandledProcess.EXP_ERROR).toString());
             }
+            //
+            checkForUnhandledExceptions(wf, wfSession, wfProcessResult);
 
 
         } catch (WorkflowException e) {
