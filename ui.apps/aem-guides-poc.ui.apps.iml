@@ -11,6 +11,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="aem-guides-poc.core" />
+    <orderEntry type="library" name="Maven: com.adobe.aemfd:aemfd-client-sdk:6.0.490" level="project" />
     <orderEntry type="library" name="Maven: com.adobe.cq:core.wcm.components.core:2.13.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.adobe.aem:uber-jar:apis:6.5.5" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.jcr:jcr:2.0" level="project" />

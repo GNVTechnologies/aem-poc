@@ -86,6 +86,32 @@ Import-Package: javax.annotation;version=0.0.0,*
             <artifactId>slf4j-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- Forms Workflow Dependencies -->
+        <!--
+        <dependency>
+            <artifactId>adobe-aemfd-workflow-process</artifactId>
+            <version>5.0.98</version>
+            <groupId>com.adobe.aemfd</groupId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <artifactId>adobe-lc-forms-bedrock-connector</artifactId>
+            <version>8.0.148</version>
+            <groupId>com.adobe.livecycle</groupId>
+            <scope>provided</scope>
+        </dependency>
+        -->
+        <dependency>
+            <artifactId>adobe-aemfd-workflow-process</artifactId>
+            <version>5.0.98</version>
+            <groupId>com.adobe.aemfd</groupId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.adobe.aemfd</groupId>
+            <artifactId>aemfd-client-sdk</artifactId>
+            <version>6.0.490</version>
+        </dependency>
         <!-- OSGi Dependencies -->
         <dependency>
             <groupId>org.osgi</groupId>

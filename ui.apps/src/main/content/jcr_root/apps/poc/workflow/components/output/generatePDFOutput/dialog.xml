@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Dialog"
+    title="Generate Non Interactive PDF"
+    xtype="dialog">
+    <items jcr:primaryType="cq:WidgetCollection">
+        <tabs jcr:primaryType="cq:TabPanel">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <inDocs
+                    jcr:primaryType="nt:unstructured"
+                    title="Input Documents"
+                    xtype="panel">
+                    <items jcr:primaryType="cq:WidgetCollection">
+                        <urlOrFileName
+                            jcr:primaryType="cq:Widget"
+                            allowBlank="{Boolean}false"
+                            fieldDescription="Data XML to be merged with template"
+                            fieldLabel="Template File"
+                            name="./metaData/urlOrFileName"
+                            xtype="coreInDoc">
+                            <fieldConfig
+                                jcr:primaryType="cq:Widget"
+                                xtype="textfield"/>
+                        </urlOrFileName>
+                        <data
+                            jcr:primaryType="cq:Widget"
+                            fieldDescription="Data XML to be merged with template"
+                            fieldLabel="Data Document"
+                            name="./metaData/data"
+                            xtype="coreInDoc">
+                            <fieldConfig
+                                jcr:primaryType="cq:Widget"
+                                xtype="textfield"/>
+                        </data>
+                    </items>
+                </inDocs>
+                <outDocs
+                    jcr:primaryType="nt:unstructured"
+                    title="Output Documents"
+                    xtype="panel">
+                    <items jcr:primaryType="cq:WidgetCollection">
+                        <outPutPath
+                            jcr:primaryType="cq:Widget"
+                            fieldDescription="File where output PDF is to be saved"
+                            fieldLabel="Output Document"
+                            name="./metaData/outputpdf"
+                            xtype="coreOutDoc">
+                            <fieldConfig
+                                jcr:primaryType="cq:Widget"
+                                xtype="textfield"/>
+                        </outPutPath>
+                    </items>
+                </outDocs>
+                <parameters
+                    jcr:primaryType="nt:unstructured"
+                    title="Parameters"
+                    xtype="panel">
+                    <items jcr:primaryType="cq:WidgetCollection">
+                        <contentroot
+                            jcr:primaryType="cq:Widget"
+                            fieldDescription="Directory where  fragments and images are present"
+                            fieldLabel="Content Root"
+                            name="./metaData/contentroot"
+                            xtype="coreInDoc">
+                            <fieldConfig
+                                jcr:primaryType="cq:Widget"
+                                xtype="textfield"/>
+                        </contentroot>
+                        <locale
+                            jcr:primaryType="cq:Widget"
+                            allowBlank="{Boolean}true"
+                            defaultValue=""
+                            fieldDescription="Default locale to use in rendered PDF"
+                            fieldLabel="Locale"
+                            name="./metaData/locale"/>
+                        <acrobatversion
+                            jcr:primaryType="cq:Widget"
+                            allowBlank="{Boolean}false"
+                            defaultValue="Acrobat_11"
+                            fieldDescription="Minimum version of Acrobat required to view rendered PDF"
+                            fieldLabel="Acrobat Version"
+                            name="./metaData/acrobatversion"
+                            type="select"
+                            xtype="selection">
+                            <options jcr:primaryType="cq:WidgetCollection">
+                                <acrobat_10
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Acrobat 10"
+                                    value="Acrobat_10"/>
+                                <acrobat_10_1
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Acrobat 10.1"
+                                    value="Acrobat_10_1"/>
+                                <acrobat_11
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Acrobat 11"
+                                    value="Acrobat_11"/>
+                            </options>
+                        </acrobatversion>
+                        <linearizedpdf
+                            jcr:primaryType="cq:Widget"
+                            defaultValue="false"
+                            fieldDescription="Optimize generated PDF for Web view"
+                            fieldLabel="Linearized PDF"
+                            name="./metaData/linearized"
+                            type="checkbox"
+                            xtype="selection"/>
+                        <taggedpdf
+                            jcr:primaryType="cq:Widget"
+                            defaultValue="false"
+                            fieldDescription="Make generated PDF accessible"
+                            fieldLabel="Tagged PDF"
+                            name="./metaData/tagged"
+                            type="checkbox"
+                            xtype="selection"/>
+                        <xcidoc
+                            jcr:primaryType="cq:Widget"
+                            fieldDescription="XCI document to specify advance configurations"
+                            fieldLabel="XCI Document"
+                            name="./metaData/xci"
+                            xtype="coreInDoc">
+                            <fieldConfig
+                                jcr:primaryType="cq:Widget"
+                                xtype="textfield"/>
+                        </xcidoc>
+                    </items>
+                </parameters>
+            </items>
+        </tabs>
+    </items>
+</jcr:root>

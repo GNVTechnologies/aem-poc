@@ -10,6 +10,8 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import org.osgi.service.component.annotations.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Sample workflow process that sets an <code>approve</code> property to the payload based on the process argument value.
@@ -20,9 +22,10 @@ public class ExceptionHandledProcess implements WorkflowProcess {
   private static final String TYPE_JCR_PATH = "JCR_PATH";
   public static final String EXP_DATA_1 = "exp-data-1";
   public static final String EXP_ERROR = "exp-error";
+  private final Logger logger = LoggerFactory.getLogger(getClass());
 
   public void execute(WorkItem item, WorkflowSession session, MetaDataMap args) throws WorkflowException {
-
+    logger.error("Exception Handled NOT throwing exception");
     MetaDataMap wfd = item.getWorkflow().getWorkflowData().getMetaDataMap();
     try {
       wfd.put(EXP_DATA_1, "ExceptionHandledProcess Sample Data 1");

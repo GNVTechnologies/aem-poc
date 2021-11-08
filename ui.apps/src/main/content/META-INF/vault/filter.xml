@@ -3,4 +3,5 @@
     <filter root="/apps/poc/clientlibs"/>
     <filter root="/apps/poc/components"/>
     <filter root="/apps/poc/i18n"/>
+    <filter root="/apps/poc/workflow"/>
 </workspaceFilter>

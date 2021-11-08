@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="POC Generate Non Interactive PDF"
+    sling:resourceType="cq/gui/components/authoring/dialog"
+    extraClientlibs="[cq.workflow-util,cq.workflow-output]">
+    <content
+        granite:id="workflow-output-genPDFOP"
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/tabs">
+        <items jcr:primaryType="nt:unstructured">
+            <common
+                cq:hideOnEdit="true"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="common"
+                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"/>
+            <process
+                cq:hideOnEdit="true"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="process"
+                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"/>
+            <inDocs
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Input Documents"
+                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns">
+                <items jcr:primaryType="nt:unstructured">
+                    <column
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                        <items jcr:primaryType="nt:unstructured">
+                            <urlOrFileNameContainer
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/container">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <inputDocumentFieldSet
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/include"
+                                        path="fd/workflow/components/common/inputOutputComponent"/>
+                                </items>
+                                <granite:data
+                                    jcr:primaryType="nt:unstructured"
+                                    categories="RELATIVE_PLOAD USE_PAYLOAD ABSOLUTE_PATH VARIABLE"
+                                    description="For a variable, specify only absolute path"
+                                    label="Select template file using"
+                                    name="urlOrFileName"
+                                    required="true"
+                                    variabletype="java.lang.String"/>
+                            </urlOrFileNameContainer>
+                            <dataContainer
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/container">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <inputDocumentFieldSet
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/include"
+                                        path="fd/workflow/components/common/inputOutputComponent"/>
+                                </items>
+                                <granite:data
+                                    jcr:primaryType="nt:unstructured"
+                                    categories="RELATIVE_PLOAD USE_PAYLOAD ABSOLUTE_PATH VARIABLE BLANK"
+                                    label="Select data document using"
+                                    name="data"
+                                    required="false"
+                                    variabletype="com.adobe.aemfd.docmanager.Document org.w3c.dom.Document"/>
+                            </dataContainer>
+                        </items>
+                    </column>
+                </items>
+            </inDocs>
+            <outDocs
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Output Documents"
+                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns">
+                <items jcr:primaryType="nt:unstructured">
+                    <column
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                        <items jcr:primaryType="nt:unstructured">
+                            <outputContainer
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/container">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <inputDocumentFieldSet
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/include"
+                                        path="fd/workflow/components/common/inputOutputComponent"/>
+                                </items>
+                                <granite:data
+                                    jcr:primaryType="nt:unstructured"
+                                    categories="OVERWRITE UNDER_PLOAD VARIABLE"
+                                    label="Save output document using below options"
+                                    name="outputpdf"
+                                    required="false"
+                                    variabletype="com.adobe.aemfd.docmanager.Document"/>
+                            </outputContainer>
+                        </items>
+                    </column>
+                </items>
+            </outDocs>
+            <parameters
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Parameters"
+                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns">
+                <items jcr:primaryType="nt:unstructured">
+                    <column
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                        <items jcr:primaryType="nt:unstructured">
+                            <contentrootContainer
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/container">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <inputDocumentFieldSet
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/include"
+                                        path="fd/workflow/components/common/inputOutputComponent"/>
+                                </items>
+                                <granite:data
+                                    jcr:primaryType="nt:unstructured"
+                                    categories="RELATIVE_PLOAD USE_PAYLOAD ABSOLUTE_PATH VARIABLE BLANK"
+                                    label="Content Root"
+                                    name="contentroot"
+                                    required="false"
+                                    variabletype="java.lang.String"/>
+                            </contentrootContainer>
+                            <locale
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <column
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <localePath
+                                                granite:class="workflow-inputDataPathValue"
+                                                granite:id="workflow-inputDataPathValue"
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="fd/workflow/components/common/variablePropertyComponent"
+                                                fieldDescription="Default locale to use in rendered PDF"
+                                                fieldLabel="Locale"
+                                                name="./metaData/locale"
+                                                type="java.lang.String">
+                                                <inputfield
+                                                    granite:class="workflow-variable-input"
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"/>
+                                            </localePath>
+                                        </items>
+                                    </column>
+                                </items>
+                            </locale>
+                            <acrobatversion
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <column
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <acrobatversion
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                                fieldDescription="Minimum version of Acrobat required to view rendered PDF"
+                                                fieldLabel="Acrobat Version"
+                                                name="./metaData/acrobatversion"
+                                                value="Acrobat_11">
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <acrobat_10
+                                                        jcr:primaryType="nt:unstructured"
+                                                        text="Acrobat 10"
+                                                        value="Acrobat_10"/>
+                                                    <acrobat_10_1
+                                                        jcr:primaryType="nt:unstructured"
+                                                        text="Acrobat 10.1"
+                                                        value="Acrobat_10_1"/>
+                                                    <acrobat_11
+                                                        jcr:primaryType="nt:unstructured"
+                                                        text="Acrobat 11"
+                                                        value="Acrobat_11"/>
+                                                </items>
+                                            </acrobatversion>
+                                        </items>
+                                    </column>
+                                </items>
+                            </acrobatversion>
+                            <linearizedpdf
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/fieldset">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <column
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <linearizedpdf
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                fieldDescription="Optimize generated PDF for Web view"
+                                                fieldLabel="Linearized PDF"
+                                                name="./metaData/linearized"
+                                                text="Linearized PDF"
+                                                value="{Boolean}true"/>
+                                        </items>
+                                    </column>
+                                </items>
+                            </linearizedpdf>
+                            <taggedpdf
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/fieldset">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <column
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <taggedpdf
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                fieldDescription="Make generated PDF accessible"
+                                                fieldLabel="Tagged PDF"
+                                                name="./metaData/tagged"
+                                                text="Tagged PDF"
+                                                value="{Boolean}true"/>
+                                        </items>
+                                    </column>
+                                </items>
+                            </taggedpdf>
+                            <xcidocContainer
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/container">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <inputDocumentFieldSet
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/include"
+                                        path="fd/workflow/components/common/inputOutputComponent"/>
+                                </items>
+                                <granite:data
+                                    jcr:primaryType="nt:unstructured"
+                                    categories="RELATIVE_PLOAD USE_PAYLOAD ABSOLUTE_PATH VARIABLE BLANK"
+                                    label="Select XCI document using"
+                                    name="xci"
+                                    required="false"
+                                    variabletype="com.adobe.aemfd.docmanager.Document org.w3c.dom.Document"/>
+                            </xcidocContainer>
+                        </items>
+                    </column>
+                </items>
+            </parameters>
+            <other
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Other Parameters"
+                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns">
+                <items jcr:primaryType="nt:unstructured">
+                    <column
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                        <items jcr:primaryType="nt:unstructured">
+                            <retainsignfields
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/fieldset">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <column
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <retainsignfields
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                fieldDescription="Retain interactive unsigned signature fields"
+                                                fieldLabel="Retain Signature Fields"
+                                                name="./metaData/retainsignfields"
+                                                text="Retain Signature Fields"
+                                                value="{Boolean}true"/>
+                                        </items>
+                                    </column>
+                                </items>
+                            </retainsignfields>
+                        </items>
+                    </column>
+                </items>
+            </other>
+        </items>
+    </content>
+</jcr:root>

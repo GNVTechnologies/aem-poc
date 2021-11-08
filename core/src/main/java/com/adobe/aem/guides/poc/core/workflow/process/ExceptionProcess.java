@@ -12,6 +12,8 @@ import org.osgi.service.component.annotations.*;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Sample workflow process that sets an <code>approve</code> property to the payload based on the process argument value.
@@ -20,8 +22,10 @@ import javax.jcr.Session;
 public class ExceptionProcess implements WorkflowProcess {
 
   private static final String TYPE_JCR_PATH = "JCR_PATH";
+  private final Logger logger = LoggerFactory.getLogger(getClass());
 
   public void execute(WorkItem item, WorkflowSession session, MetaDataMap args) throws WorkflowException {
+    logger.error("Exception Proces throwing exception");
     if (true) throw new WorkflowException("programatically thrown exception");
   }
 
