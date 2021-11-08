@@ -7,6 +7,6 @@
         jcr:description="POC Generate Non Interactive PDF"
         jcr:primaryType="nt:unstructured"
         jcr:title="POC Generate Non Interactive PDF"
-        PROCESS="com.adobe.fd.workflow.output.impl.GeneratePDFOutputProcess"
+        PROCESS="com.adobe.aem.guides.poc.core.workflow.process.POCGeneratePDFOutputProcess"
         PROCESS_AUTO_ADVANCE="true"/>
 </jcr:root>
