@@ -112,6 +112,10 @@ Import-Package: javax.annotation;version=0.0.0,*
             <artifactId>aemfd-client-sdk</artifactId>
             <version>6.0.490</version>
         </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+        </dependency>
         <!-- OSGi Dependencies -->
         <dependency>
             <groupId>org.osgi</groupId>
