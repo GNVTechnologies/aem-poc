@@ -59,7 +59,8 @@ public class AdapativeFormPrefillFilter implements Filter {
         SlingHttpServletRequest slingRequest = (SlingHttpServletRequest) request;
 
         if ("GET".equals(slingRequest.getMethod())
-            && (slingRequest.getPathInfo().startsWith("/content/dam/formsanddocuments"))
+            && ((slingRequest.getPathInfo().startsWith("/content/dam/formsanddocuments"))
+            ||(slingRequest.getPathInfo().startsWith("/content/forms")))
             //    && (prefillData != null)
             && (slingRequest.getAttribute("data") == null)) {
             boolean prefillDataAvailable = false;

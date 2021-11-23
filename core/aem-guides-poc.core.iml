@@ -18,6 +18,7 @@
     <orderEntry type="library" scope="TEST" name="Maven: joda-time:joda-time:2.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.adobe.aemfd:adobe-aemfd-workflow-process:5.0.98" level="project" />
     <orderEntry type="library" name="Maven: com.adobe.aemfd:aemfd-client-sdk:6.0.490" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.jetbrains:annotations:17.0.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.osgi:org.osgi.annotation.versioning:1.1.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.osgi:org.osgi.annotation.bundle:1.0.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.osgi:org.osgi.service.metatype.annotations:1.4.0" level="project" />
