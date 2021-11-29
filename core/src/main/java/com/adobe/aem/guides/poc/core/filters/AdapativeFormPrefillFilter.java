@@ -50,6 +50,7 @@ import java.util.Set;
 public class AdapativeFormPrefillFilter implements Filter {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final String PREFILL_PREFIX = "prefill2-";
 
     @Override
     public void doFilter(ServletRequest request, final ServletResponse response,
@@ -75,14 +76,14 @@ public class AdapativeFormPrefillFilter implements Filter {
                 for(Entry<String,RequestParameter[]> entry : parameterSet){
                     String paramName = entry.getKey();
                     String paramValue = entry.getValue()[0].getString();
-                    if(paramName.startsWith("prefill-")) {
+                    if(paramName.startsWith(PREFILL_PREFIX)) {
                         prefillDataAvailable = true;
                         prefillData.append("<")
-                            .append(paramName.split("prefill-")[1])
+                            .append(paramName.split(PREFILL_PREFIX)[1])
                             .append(">")
                             .append(paramValue)
                             .append("</")
-                            .append(paramName.split("prefill-")[1])
+                            .append(paramName.split(PREFILL_PREFIX)[1])
                             .append(">");
                     }
 
