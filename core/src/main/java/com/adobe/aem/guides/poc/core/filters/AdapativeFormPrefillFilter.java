@@ -58,44 +58,49 @@ public class AdapativeFormPrefillFilter implements Filter {
 
         //RequestParameter prefillData = slingRequest.getRequestParameter("prefillData");
         SlingHttpServletRequest slingRequest = (SlingHttpServletRequest) request;
-
         if ("GET".equals(slingRequest.getMethod())
             && ((slingRequest.getPathInfo().startsWith("/content/dam/formsanddocuments"))
             ||(slingRequest.getPathInfo().startsWith("/content/forms")))
             //    && (prefillData != null)
             && (slingRequest.getAttribute("data") == null)) {
-            boolean prefillDataAvailable = false;
-            StringBuffer prefillData = new StringBuffer();
-            prefillData.append("<afData>");
-            prefillData.append("<afUnboundData>");
-            prefillData.append("<data>");
-            RequestParameterMap params = slingRequest.getRequestParameterMap();
-            if(params!=null && !params.isEmpty()){
-                Set<Entry<String, RequestParameter[]>> parameterSet = params.entrySet();
-                Iterator<Entry<String, RequestParameter[]>> iter = parameterSet.iterator();
-                for(Entry<String,RequestParameter[]> entry : parameterSet){
-                    String paramName = entry.getKey();
-                    String paramValue = entry.getValue()[0].getString();
-                    if(paramName.startsWith(PREFILL_PREFIX)) {
-                        prefillDataAvailable = true;
-                        prefillData.append("<")
-                            .append(paramName.split(PREFILL_PREFIX)[1])
-                            .append(">")
-                            .append(paramValue)
-                            .append("</")
-                            .append(paramName.split(PREFILL_PREFIX)[1])
-                            .append(">");
-                    }
 
+            if (slingRequest.getSession().getAttribute("data") != null) {
+                logger.info("Data found in session, setting data from session");
+                slingRequest.setAttribute("data", slingRequest.getSession().getAttribute("data"));
+            } else {
+                boolean prefillDataAvailable = false;
+                StringBuffer prefillData = new StringBuffer();
+                prefillData.append("<afData>");
+                prefillData.append("<afUnboundData>");
+                prefillData.append("<data>");
+                RequestParameterMap params = slingRequest.getRequestParameterMap();
+                if (params != null && !params.isEmpty()) {
+                    Set<Entry<String, RequestParameter[]>> parameterSet = params.entrySet();
+                    Iterator<Entry<String, RequestParameter[]>> iter = parameterSet.iterator();
+                    for (Entry<String, RequestParameter[]> entry : parameterSet) {
+                        String paramName = entry.getKey();
+                        String paramValue = entry.getValue()[0].getString();
+                        if (paramName.startsWith(PREFILL_PREFIX)) {
+                            prefillDataAvailable = true;
+                            prefillData.append("<")
+                                .append(paramName.split(PREFILL_PREFIX)[1])
+                                .append(">")
+                                .append(paramValue)
+                                .append("</")
+                                .append(paramName.split(PREFILL_PREFIX)[1])
+                                .append(">");
+                        }
+
+                    }
                 }
-            }
-            prefillData.append("</data>");
-            prefillData.append("</afUnboundData>");
-            prefillData.append("</afData>");
-            logger.info("Form Prefill Data:"+prefillData.toString());
-            if(prefillDataAvailable) {
-                slingRequest.setAttribute("data", prefillData.toString());
-                logger.info("Set Form Prefill Data:"+prefillData.toString());
+                prefillData.append("</data>");
+                prefillData.append("</afUnboundData>");
+                prefillData.append("</afData>");
+                logger.info("Form Prefill Data:" + prefillData.toString());
+                if (prefillDataAvailable) {
+                    slingRequest.setAttribute("data", prefillData.toString());
+                    logger.info("Set Form Prefill Data:" + prefillData.toString());
+                }
             }
         }
         filterChain.doFilter(request, response);

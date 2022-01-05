@@ -1,5 +1,8 @@
 
-#How to add a custom jar file to local maven repo
-mvn install:install-file -Dfile=/path/to/ssj.jar -DgroupId=ca.umontreal.iro -DartifactId=ssj -Dversion=2.5 -Dpackaging=jar
 # Add adobe-aemfd=workflow-process to local maven repo
 mvn install:install-file -Dfile=resources/adobe-aemfd-workflow-process-5.0.98.jar -DgroupId=com.adobe.aemfd -DartifactId=adobe-aemfd-workflow-process -Dversion=5.0.98 -Dpackaging=jar
+
+### Sample form GET based prefill
+http://localhost:4502/content/forms/af/test-2-form.html?wcmmode=disabled&prefill2-first_name=test
+
+curl -vvvv -u admin:admin -L -X POST -F 'formId=abc' -F 'prefill2-first_name=test4' -F 'email=linuxize@example.com' http://localhost:4502/bin/poc/form/prefill
